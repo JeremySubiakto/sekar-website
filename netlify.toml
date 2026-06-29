@@ -1,0 +1,15 @@
+# Netlify config — situs statis, tanpa proses build.
+[build]
+  publish = "."
+
+# Aset (logo, gambar) jarang berubah → cache panjang.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML selalu segar.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
