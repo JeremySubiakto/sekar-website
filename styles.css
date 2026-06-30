@@ -253,6 +253,23 @@ body.modal-open{overflow:hidden}
 .svc-modal-actions{display:flex;flex-wrap:wrap;gap:10px}
 .btn-soft{background:transparent;color:var(--deep);border:1.5px solid var(--deep);padding:12.5px 24px}
 .btn-soft:hover{background:var(--deep);color:#fff;transform:translateY(-1px)}
+
+/* clickable packages + package modal */
+.pkg{cursor:pointer}
+.pkg:focus-visible{outline:2px solid var(--gold-d);outline-offset:3px}
+.pkg .pkg-more{display:inline-block;margin-top:14px;font-weight:600;font-size:13px;letter-spacing:.01em;color:var(--gold-ink)}
+.pkg.feat .pkg-more{color:var(--gold)}
+.pkg-modal-head{padding:32px 30px 0}
+.pkg-modal-tier{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink);font-weight:600}
+.pkg-modal-head h3{font-size:30px;color:var(--deep);margin:4px 0 2px}
+.pkg-modal-price{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;color:var(--deep);font-variant-numeric:tabular-nums;margin-bottom:12px}
+.pkg-modal-intro{font-size:15.5px;color:#4a4140;line-height:1.65}
+.pkg-modal-body{padding:18px 30px 30px}
+.pkg-modal-lbl{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-ink);font-weight:600;margin-bottom:13px}
+.pkg-modal-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.pkg-modal-list li{position:relative;padding-left:28px;font-size:15px;line-height:1.5;color:#3c3343;text-align:left}
+.pkg-modal-list li::before{content:"";position:absolute;left:2px;top:6px;width:11px;height:6px;border-left:2px solid var(--gold-d);border-bottom:2px solid var(--gold-d);transform:rotate(-45deg)}
+.pkg-modal-foot{font-size:14px;color:var(--soft);line-height:1.6;margin-bottom:20px;font-style:italic;text-align:left}
 @media(max-width:560px){.svc-modal-card{margin:0;width:100%;min-height:100%;max-height:100vh;border-radius:0}.svc-modal-media{border-radius:0}}
 
 /* ===================== HOW-IT-WORKS · TIMELINE FLOWCHART ===================== */

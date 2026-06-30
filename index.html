@@ -146,20 +146,20 @@
       <div class="wrap">
         <p class="lead-p" style="margin:0 auto" data-i18n="paket.lead">Pilih satu tingkat layanan yang paling sesuai. Tidak ada tawar-menawar, dan tidak ada biaya tersembunyi di kemudian hari.</p>
         <div class="pkgs">
-          <div class="pkg">
+          <div class="pkg" data-pkg="essential" role="button" tabindex="0">
             <p class="tag">Lestari</p>
             <h3>Essential</h3>
             <p class="price">Rp 17,5 jt</p>
             <p data-i18n="pkg1.desc">Layanan yang lengkap dan terhormat, untuk keluarga yang menginginkan kesederhanaan dalam mengantar.</p>
           </div>
-          <div class="pkg feat">
+          <div class="pkg feat" data-pkg="premium" role="button" tabindex="0">
             <span class="ribbon" data-i18n="paket.ribbon">Paling dipilih</span>
             <p class="tag">Utama</p>
             <h3>Premium</h3>
             <p class="price">Rp 32 jt</p>
             <p data-i18n="pkg2.desc">Penghormatan penuh, dengan setiap detail dijaga dan disiapkan dengan cermat.</p>
           </div>
-          <div class="pkg">
+          <div class="pkg" data-pkg="elite" role="button" tabindex="0">
             <p class="tag">Mulia</p>
             <h3>Elite</h3>
             <p class="price">Rp 45 jt</p>
@@ -306,6 +306,26 @@
   </div>
 </div>
 
+<!-- package detail modal (click a package -> what's included) -->
+<div class="svc-modal" id="pkgModal" aria-hidden="true">
+  <div class="svc-modal-backdrop" data-pclose></div>
+  <div class="svc-modal-card pkg-modal-card" role="dialog" aria-modal="true" aria-labelledby="pkgModalName">
+    <button type="button" class="svc-modal-x" data-pclose data-i18n-aria="modal.close" aria-label="Tutup">&times;</button>
+    <div class="pkg-modal-head">
+      <p class="pkg-modal-tier" id="pkgModalTier"></p>
+      <h3 id="pkgModalName"></h3>
+      <p class="pkg-modal-price" id="pkgModalPrice"></p>
+      <p class="pkg-modal-intro" id="pkgModalIntro"></p>
+    </div>
+    <div class="pkg-modal-body">
+      <p class="pkg-modal-lbl" id="pkgModalLbl"></p>
+      <ul class="pkg-modal-list" id="pkgModalList"></ul>
+      <p class="pkg-modal-foot" id="pkgModalFoot"></p>
+      <a class="btn" id="pkgModalCta" href="#"></a>
+    </div>
+  </div>
+</div>
+
 <a class="fab wa" data-wa href="https://wa.me/6287771111177?text=Halo%20Sekar%2C%20saya%20membutuhkan%20pendampingan." data-i18n-aria="fab.aria" aria-label="Hubungi Sekar via WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.042zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
 </a>
@@ -426,6 +446,7 @@
       "svc_companion": "Pendampingan Funeral Manager",
       "svc_companion_d": "Di setiap layanan, satu orang dari Sekar menemani Anda dari telepon pertama sampai semuanya selesai. Bukan sekadar suara di telepon, tapi seseorang yang benar-benar hadir.",
       "svc_more": "Selengkapnya →",
+      "pkg.more": "Lihat yang termasuk →",
       "modal.cta": "Tanya tentang layanan ini",
       "modal.pdf": "Unduh brosur (PDF)",
       "modal.close": "Tutup",
@@ -540,6 +561,7 @@
       "svc_companion": "A Funeral Manager by Your Side",
       "svc_companion_d": "In every service, one person from Sekar stays with you from the first call until everything is done. Not a call center, but someone who is truly there.",
       "svc_more": "View details →",
+      "pkg.more": "See what's included →",
       "modal.cta": "Ask about this service",
       "modal.pdf": "Download brochure (PDF)",
       "modal.close": "Close",
@@ -735,6 +757,79 @@
     if (!img || !q) return;
     resolveImage(q, function (url) { img.onload = function () { img.classList.add("loaded"); }; img.src = url; });
   });
+
+  /* ---- package detail modal (click a package -> what's included) ---- */
+  var PKG = {
+    essential: {
+      id: { tier: "Lestari", name: "Essential", price: "Rp 17,5 jt",
+        intro: "Untuk keluarga yang ingin mengantar dengan tenang dan bersahaja. Sederhana, tetapi tidak pernah kehilangan rasa hormat.",
+        items: ["Pemandian dan pengkafanan sesuai keyakinan keluarga", "Peti yang layak dan terhormat", "Tenda, kursi, dan tata suara untuk prosesi", "Pemuka agama dan pemandu acara", "Pengurusan surat keterangan kematian", "Satu Funeral Manager yang menemani dari awal sampai selesai"],
+        foot: "Belum yakin paket yang mana? Tidak apa-apa. Hubungi kami, kami bantu memilih dengan tenang, tanpa terburu-buru." },
+      en: { tier: "Lestari", name: "Essential", price: "Rp 17.5 jt",
+        intro: "For families who wish to say goodbye gently and simply. Modest, yet never without dignity.",
+        items: ["Bathing and shrouding according to your family's faith", "A proper, dignified casket", "Tent, chairs, and a sound system for the ceremony", "A religious leader and an MC", "Handling of the death certificate", "One Funeral Manager beside you from start to finish"],
+        foot: "Not sure which one fits? That is alright. Reach us and we will help you choose calmly, with no rush." }
+    },
+    premium: {
+      id: { tier: "Utama", name: "Premium", price: "Rp 32 jt",
+        intro: "Saat Anda ingin setiap detail terjaga. Kami menyiapkan penghormatan yang penuh, supaya Anda cukup hadir dan berdoa.",
+        items: ["Semua yang ada di paket Essential", "Peti pilihan dengan kualitas lebih baik", "Rangkaian bunga dan dekorasi untuk rumah duka", "Konsumsi untuk para pelayat", "Bunga papan ucapan duka", "Dokumentasi foto sepanjang prosesi", "Koordinasi penuh semua kebutuhan oleh Funeral Manager"],
+        foot: "Belum yakin paket yang mana? Tidak apa-apa. Hubungi kami, kami bantu memilih dengan tenang, tanpa terburu-buru." },
+      en: { tier: "Utama", name: "Premium", price: "Rp 32 jt",
+        intro: "For when you want every detail cared for. We prepare a full tribute, so you only need to be present and pray.",
+        items: ["Everything in the Essential package", "A higher-quality casket of your choosing", "Flower arrangements and decor for the funeral home", "Refreshments for the mourners", "Condolence flower boards", "Photo documentation throughout the ceremony", "Full coordination of every need by your Funeral Manager"],
+        foot: "Not sure which one fits? That is alright. Reach us and we will help you choose calmly, with no rush." }
+    },
+    elite: {
+      id: { tier: "Mulia", name: "Elite", price: "Rp 45 jt",
+        intro: "Untuk perpisahan yang paling khidmat. Kami mengurus segalanya dengan saksama, sampai kenangan terakhir pun tersimpan dengan baik.",
+        items: ["Semua yang ada di paket Premium", "Peti ukiran terbaik", "Dekorasi dan rangkaian bunga premium", "Dokumentasi foto dan video lengkap", "Pengurusan administrasi menyeluruh", "Penyesuaian penuh sesuai adat dan keyakinan keluarga", "Pendamping siaga khusus, siang dan malam"],
+        foot: "Belum yakin paket yang mana? Tidak apa-apa. Hubungi kami, kami bantu memilih dengan tenang, tanpa terburu-buru." },
+      en: { tier: "Mulia", name: "Elite", price: "Rp 45 jt",
+        intro: "For the most solemn farewell. We tend to everything with care, so even the final memories are kept well.",
+        items: ["Everything in the Premium package", "Our finest carved casket", "Premium decor and flower arrangements", "Full photo and video documentation", "Complete handling of all paperwork", "Full adaptation to your family's customs and faith", "A dedicated companion on standby, day and night"],
+        foot: "Not sure which one fits? That is alright. Reach us and we will help you choose calmly, with no rush." }
+    }
+  };
+  var pkgModal = document.getElementById("pkgModal");
+  if (pkgModal) {
+    var pk = {
+      tier: document.getElementById("pkgModalTier"), name: document.getElementById("pkgModalName"),
+      price: document.getElementById("pkgModalPrice"), intro: document.getElementById("pkgModalIntro"),
+      lbl: document.getElementById("pkgModalLbl"), list: document.getElementById("pkgModalList"),
+      foot: document.getElementById("pkgModalFoot"), cta: document.getElementById("pkgModalCta")
+    };
+    var pkgLast = null;
+    function openPkg(card) {
+      var d = PKG[card.getAttribute("data-pkg")]; if (!d) return;
+      var en = document.documentElement.lang === "en", t = en ? d.en : d.id;
+      pk.tier.textContent = t.tier; pk.name.textContent = t.name; pk.price.textContent = t.price;
+      pk.intro.textContent = t.intro; pk.foot.textContent = t.foot;
+      pk.lbl.textContent = en ? "What's included" : "Yang termasuk";
+      pk.list.innerHTML = "";
+      t.items.forEach(function (it) { var li = document.createElement("li"); li.textContent = it; pk.list.appendChild(li); });
+      pk.cta.textContent = en ? "Ask about this package" : "Tanya tentang paket ini";
+      var msg = en ? "Hello Sekar, I'd like to ask about the " + t.name + " package (" + t.price + ")."
+                   : "Halo Sekar, saya ingin bertanya tentang paket " + t.name + " (" + t.price + ").";
+      pk.cta.setAttribute("href", "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg));
+      pkgLast = card;
+      pkgModal.classList.add("open"); pkgModal.setAttribute("aria-hidden", "false"); document.body.classList.add("modal-open");
+      var x = pkgModal.querySelector(".svc-modal-x"); if (x) x.focus();
+    }
+    function closePkg() {
+      pkgModal.classList.remove("open"); pkgModal.setAttribute("aria-hidden", "true"); document.body.classList.remove("modal-open");
+      if (pkgLast) { try { pkgLast.focus(); } catch (e) {} }
+    }
+    pkgModal.querySelectorAll("[data-pclose]").forEach(function (el) { el.addEventListener("click", closePkg); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && pkgModal.classList.contains("open")) closePkg(); });
+    document.querySelectorAll(".pkg[data-pkg]").forEach(function (card) {
+      var more = document.createElement("span"); more.className = "pkg-more"; more.setAttribute("data-i18n", "pkg.more");
+      more.textContent = (document.documentElement.lang === "en") ? "See what's included →" : "Lihat yang termasuk →";
+      card.appendChild(more);
+      card.addEventListener("click", function () { openPkg(card); });
+      card.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPkg(card); } });
+    });
+  }
 })();
 </script>
 
