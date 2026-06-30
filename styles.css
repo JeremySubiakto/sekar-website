@@ -214,6 +214,7 @@ nav{display:flex;align-items:center;gap:22px;height:68px}
 .kontak .lead-p{margin:0 auto 26px}
 .kontak-lines{font-size:17px;color:#3c3343;line-height:2.1;margin-top:22px}
 .kontak-lines a{color:var(--deep);font-weight:600}
+.kontak-lines .kontak-person{font-weight:600;color:var(--deep)}
 .kontak-lines .muted{color:var(--soft);font-size:14.5px}
 
 /* slim persistent footer */
