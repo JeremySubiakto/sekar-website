@@ -16,21 +16,32 @@
   .hint b{font-weight:600}
 
   .bro{position:relative;width:210mm;min-height:297mm;margin:0 auto 22px;display:flex;flex-direction:column;
-       padding:24mm 22mm 20mm;overflow:hidden;
-       background:radial-gradient(130% 100% at 50% -5%,#5a2a83 0,#3a1659 55%,#2d1040 100%);
-       box-shadow:0 18px 50px rgba(45,16,64,.35)}
-  .mark{width:48px;height:48px;display:block;color:var(--cream)}
-  .eyebrow{margin-top:16mm;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;font-size:11px;font-weight:600}
-  .title{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:46px;line-height:1.04;color:#fff;margin-top:8px}
-  .subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;color:var(--gold);font-size:23px;margin-top:6px}
-  .lead{font-size:16px;line-height:1.72;color:#ece2f6;max-width:60ch;margin-top:9mm}
-  .rule{width:62px;height:2px;background:var(--gold);border:0;margin:9mm 0 8mm}
-  .sub{color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-size:12px;font-weight:600}
-  .list{list-style:none;margin-top:6mm;display:flex;flex-direction:column;gap:11px}
-  .list li{position:relative;padding-left:30px;font-size:15px;line-height:1.5;color:#efe8f7}
-  .list li::before{content:"";position:absolute;left:2px;top:5px;width:12px;height:7px;border-left:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(-45deg)}
-  .note{margin-top:7mm;font-size:12.5px;font-style:italic;color:#c4b4dd;line-height:1.55}
-  .close{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;line-height:1.3;color:#fff;margin-top:auto;padding-top:10mm}
+       overflow:hidden;background:#2d1040;box-shadow:0 18px 50px rgba(45,16,64,.35)}
+
+  /* cover band (photo sits here once the Google key is set) */
+  .cover{position:relative;height:120mm;flex:0 0 auto;display:flex;flex-direction:column;justify-content:space-between;
+         padding:20mm 22mm;background:linear-gradient(150deg,#7a4aa6 0%,#4a1f6e 50%,#2d1040 100%)}
+  .cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
+  .cover-img.loaded{opacity:.5}
+  .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(45,16,64,.15),rgba(45,16,64,.72))}
+  .cover-top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center}
+  .cover-top .mk{width:34px;height:34px;color:var(--cream)}
+  .cover-top .ph{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,247,242,.55)}
+  .cover-ttl{position:relative;z-index:2}
+  .eb{color:var(--gold);letter-spacing:.2em;text-transform:uppercase;font-size:11px;font-weight:600;margin-bottom:8px}
+  .tt{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:46px;line-height:1.02;color:#fff}
+  .st{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:21px;color:var(--gold);margin-top:4px}
+
+  .body{flex:1;display:flex;flex-direction:column;padding:16mm 22mm 14mm}
+  .story{font-size:15px;line-height:1.72;color:#ece2f6}
+  .story p{margin-bottom:11px}
+  .story p:last-child{margin-bottom:0}
+  .lbl{color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-size:12px;font-weight:600;margin:14mm 0 9px}
+  .list{list-style:none;display:flex;flex-direction:column;gap:9px}
+  .list li{position:relative;padding-left:28px;font-size:14.5px;line-height:1.45;color:#efe8f7}
+  .list li::before{content:"";position:absolute;left:2px;top:5px;width:11px;height:6px;border-left:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(-45deg)}
+  .note{margin-top:6mm;font-size:12.5px;font-style:italic;color:#c4b4dd;line-height:1.55}
+  .close{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;line-height:1.3;color:#fff;margin-top:auto;padding-top:9mm}
   .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-top:7mm;padding-top:6mm;border-top:1px solid rgba(255,255,255,.16);font-size:12px;color:#c9b8e0}
   .fbrand{display:flex;align-items:center;gap:9px}
   .fbrand svg{width:22px;height:22px;color:var(--gold)}
@@ -43,7 +54,7 @@
     @page{size:A4 portrait;margin:0}
     body{background:none}
     .hint{display:none}
-    .bro{margin:0;box-shadow:none;page-break-after:always;min-height:297mm}
+    .bro{margin:0;box-shadow:none;page-break-after:always}
     .bro:last-of-type{page-break-after:auto}
   }
 </style>
@@ -51,10 +62,9 @@
 <body>
 
 <div class="hint">
-  <b>Brosur layanan Sekar, 12 halaman.</b> Untuk menyimpan PDF atau mencetak: tekan <b>Ctrl/Cmd&nbsp;+&nbsp;P</b>, pilih ukuran <b>A4</b>, lalu aktifkan <b>"Background graphics" / "Grafik latar"</b> agar warnanya ikut tercetak. Untuk dibagikan di WhatsApp, cukup tangkap layar (screenshot) halaman yang diinginkan.
+  <b>Brosur layanan Sekar, 12 halaman.</b> Untuk menyimpan PDF atau mencetak: tekan <b>Ctrl/Cmd&nbsp;+&nbsp;P</b>, pilih <b>A4</b>, aktifkan <b>"Background graphics" / "Grafik latar"</b>. Untuk dibagikan di WhatsApp, cukup tangkap layar (screenshot) halaman yang diinginkan. Foto pada sampul tampil otomatis setelah kunci Google diisi di bawah.
 </div>
 
-<!-- reusable melati mark -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="melati" viewBox="0 0 100 100"><g fill="currentColor" fill-rule="evenodd">
     <path d="M 54.60 39.50 C 59.60 35.50 65.80 31.10 65.00 23.40 C 64.40 13.60 53.40 6.00 50.00 4.50 C 46.60 6.00 35.60 13.60 35.00 23.40 C 34.20 31.10 40.40 35.50 45.40 39.50 Z"/><path d="M 61.41 51.13 C 66.76 54.65 72.86 59.19 79.93 56.05 C 89.07 52.45 92.90 39.64 93.27 35.94 C 90.80 33.17 80.17 25.06 70.66 27.51 C 63.09 29.13 60.82 36.39 58.56 42.38 Z"/><path d="M 52.45 61.20 C 50.76 67.37 48.33 74.58 53.50 80.34 C 59.75 87.91 73.11 87.60 76.74 86.81 C 78.61 83.60 83.05 70.98 77.77 62.70 C 73.89 56.00 66.29 56.09 59.89 55.79 Z"/><path d="M 40.11 55.79 C 33.71 56.09 26.11 56.00 22.23 62.70 C 16.95 70.98 21.39 83.60 23.26 86.81 C 26.89 87.60 40.25 87.91 46.50 80.34 C 51.67 74.58 49.24 67.37 47.55 61.20 Z"/><path d="M 41.44 42.38 C 39.18 36.39 36.91 29.13 29.34 27.51 C 19.83 25.06 9.20 33.17 6.73 35.94 C 7.10 39.64 10.93 52.45 20.07 56.05 C 27.14 59.19 33.24 54.65 38.59 51.13 Z"/><circle cx="50" cy="50" r="6.5"/>
@@ -63,261 +73,317 @@
 
 <!-- 1 -->
 <section class="bro">
-  <svg class="mark" viewBox="0 0 100 100"><use href="#melati"/></svg>
-  <p class="eyebrow">Layanan Sekar</p>
-  <h1 class="title">Pengantaran Terakhir</h1>
-  <p class="subtitle">untuk keluarga Muslim &amp; Non-Muslim</p>
-  <p class="lead">Mengantar yang tercinta untuk terakhir kali, sesuai keyakinan dan adat keluarga. Anda cukup hadir dan berdoa. Seluruh persiapan ada di tangan kami.</p>
-  <hr class="rule">
-  <p class="sub">Yang kami siapkan</p>
-  <ul class="list">
-    <li>Pemandian, pengkafanan, atau perawatan sesuai agama keluarga</li>
-    <li>Peti dan kelengkapan pemberangkatan</li>
-    <li>Tenda, kursi, tata suara, dan penataan rumah duka</li>
-    <li>Pemuka agama dan pemandu acara</li>
-    <li>Pendampingan penuh sampai prosesi selesai</li>
-  </ul>
-  <p class="close">Satu telepon, dan semuanya tertangani.</p>
-  <div class="foot">
-    <div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div>
-    <div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div>
+  <div class="cover" data-q="white funeral flowers procession calm serene">
+    <img class="cover-img" alt="" aria-hidden="true">
+    <div class="cover-top"><svg class="mk" viewBox="0 0 100 100"><use href="#melati"/></svg><span class="ph">Foto layanan</span></div>
+    <div class="cover-ttl"><p class="eb">Layanan Sekar</p><h1 class="tt">Pengantaran Terakhir</h1><p class="st">The final farewell</p></div>
+  </div>
+  <div class="body">
+    <div class="story">
+      <p>Saat seseorang yang dicintai berpulang, ada begitu banyak yang harus diurus dalam waktu singkat, justru ketika hati sedang paling tidak siap.</p>
+      <p>Anda tidak perlu memikul semuanya. Sekar menyiapkan seluruh prosesi sesuai keyakinan dan adat keluarga, sementara Anda bisa fokus berdoa dan mengantar.</p>
+    </div>
+    <p class="lbl">Yang kami urus</p>
+    <ul class="list">
+      <li>Pemandian dan pengkafanan sesuai agama keluarga</li>
+      <li>Peti dan kelengkapan pemberangkatan</li>
+      <li>Tenda, kursi, dan tata suara</li>
+      <li>Pemuka agama dan pemandu acara</li>
+      <li>Pendampingan penuh sampai prosesi selesai</li>
+    </ul>
+    <p class="close">Anda cukup hadir. Selebihnya, kami yang jaga.</p>
+    <div class="foot"><div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div><div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div></div>
   </div>
 </section>
 
 <!-- 2 -->
 <section class="bro">
-  <svg class="mark" viewBox="0 0 100 100"><use href="#melati"/></svg>
-  <p class="eyebrow">Layanan Sekar</p>
-  <h1 class="title">Kremasi</h1>
-  <p class="lead">Bagi keluarga yang memilih kremasi, kami mengatur setiap bagiannya dengan tenang dan terhormat, sampai abu kembali ke pelukan keluarga.</p>
-  <hr class="rule">
-  <p class="sub">Yang kami urus</p>
-  <ul class="list">
-    <li>Perawatan dan persiapan jenazah</li>
-    <li>Koordinasi jadwal dengan krematorium</li>
-    <li>Prosesi pelepasan sesuai keinginan keluarga</li>
-    <li>Penyerahan abu dalam wadah yang layak</li>
-    <li>Bantuan dokumen yang diperlukan</li>
-  </ul>
-  <p class="close">Anda menentukan caranya. Kami yang menjaga jalannya.</p>
-  <div class="foot">
-    <div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div>
-    <div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div>
+  <div class="cover" data-q="white lotus candle soft calm light">
+    <img class="cover-img" alt="" aria-hidden="true">
+    <div class="cover-top"><svg class="mk" viewBox="0 0 100 100"><use href="#melati"/></svg><span class="ph">Foto layanan</span></div>
+    <div class="cover-ttl"><p class="eb">Layanan Sekar</p><h1 class="tt">Kremasi</h1><p class="st">Cremation</p></div>
+  </div>
+  <div class="body">
+    <div class="story">
+      <p>Memilih kremasi adalah keputusan yang sangat pribadi, dan setiap keluarga punya caranya sendiri.</p>
+      <p>Apa pun pilihan Anda, kami menghormatinya dan mengatur setiap langkahnya dengan tenang, sampai abu kembali ke pelukan keluarga.</p>
+    </div>
+    <p class="lbl">Yang kami urus</p>
+    <ul class="list">
+      <li>Perawatan dan persiapan jenazah</li>
+      <li>Koordinasi jadwal dengan krematorium</li>
+      <li>Prosesi pelepasan sesuai keinginan keluarga</li>
+      <li>Penyerahan abu dalam wadah yang layak</li>
+      <li>Bantuan dokumen yang diperlukan</li>
+    </ul>
+    <p class="close">Anda menentukan caranya. Kami yang menjaga jalannya.</p>
+    <div class="foot"><div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div><div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div></div>
   </div>
 </section>
 
 <!-- 3 -->
 <section class="bro">
-  <svg class="mark" viewBox="0 0 100 100"><use href="#melati"/></svg>
-  <p class="eyebrow">Layanan Sekar</p>
-  <h1 class="title">Pemulasaraan &amp; Perawatan Jenazah</h1>
-  <p class="lead">Memandikan, mengkafani, dan merias dengan tangan yang terlatih dan hati yang menghormati. Kami memperlakukan setiap jenazah seperti keluarga sendiri.</p>
-  <hr class="rule">
-  <p class="sub">Yang kami kerjakan</p>
-  <ul class="list">
-    <li>Pemandian sesuai tuntunan agama</li>
-    <li>Pengkafanan atau pemakaian busana terbaik</li>
-    <li>Rias wajah yang lembut dan natural</li>
-    <li>Penanganan yang bersih, aman, dan penuh adab</li>
-  </ul>
-  <p class="close">Penghormatan terakhir yang layak, sejak sentuhan pertama.</p>
-  <div class="foot">
-    <div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div>
-    <div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div>
+  <div class="cover" data-q="folded white linen cloth soft calm">
+    <img class="cover-img" alt="" aria-hidden="true">
+    <div class="cover-top"><svg class="mk" viewBox="0 0 100 100"><use href="#melati"/></svg><span class="ph">Foto layanan</span></div>
+    <div class="cover-ttl"><p class="eb">Layanan Sekar</p><h1 class="tt">Pemulasaraan &amp; Perawatan Jenazah</h1><p class="st">Body care &amp; preparation</p></div>
+  </div>
+  <div class="body">
+    <div class="story">
+      <p>Memandikan dan merawat jenazah adalah penghormatan terakhir yang paling dekat dan paling pribadi.</p>
+      <p>Kami melakukannya dengan tangan yang terlatih dan hati yang menghormati, memperlakukan setiap jenazah seperti keluarga kami sendiri.</p>
+    </div>
+    <p class="lbl">Yang kami kerjakan</p>
+    <ul class="list">
+      <li>Pemandian sesuai tuntunan agama</li>
+      <li>Pengkafanan atau pemakaian busana terbaik</li>
+      <li>Rias wajah yang lembut dan natural</li>
+      <li>Penanganan yang bersih, aman, dan penuh adab</li>
+    </ul>
+    <p class="close">Penghormatan yang layak, sejak sentuhan pertama.</p>
+    <div class="foot"><div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div><div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div></div>
   </div>
 </section>
 
 <!-- 4 -->
 <section class="bro">
-  <svg class="mark" viewBox="0 0 100 100"><use href="#melati"/></svg>
-  <p class="eyebrow">Layanan Sekar</p>
-  <h1 class="title">Pengawetan Jenazah</h1>
-  <p class="lead">Saat keluarga dari jauh masih dalam perjalanan, kami menjaga jenazah tetap dalam keadaan baik. Ada waktu untuk berkumpul dan berpamitan.</p>
-  <hr class="rule">
-  <p class="sub">Yang kami sediakan</p>
-  <ul class="list">
-    <li>Pengawetan yang aman dan profesional</li>
-    <li>Penanganan oleh tenaga terlatih</li>
-    <li>Penjagaan martabat jenazah selama menunggu</li>
-    <li>Saran waktu yang wajar sesuai kondisi</li>
-  </ul>
-  <p class="close">Supaya tak seorang pun tertinggal untuk mengucap selamat jalan.</p>
-  <div class="foot">
-    <div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div>
-    <div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div>
+  <div class="cover" data-q="white lilies soft calm light">
+    <img class="cover-img" alt="" aria-hidden="true">
+    <div class="cover-top"><svg class="mk" viewBox="0 0 100 100"><use href="#melati"/></svg><span class="ph">Foto layanan</span></div>
+    <div class="cover-ttl"><p class="eb">Layanan Sekar</p><h1 class="tt">Pengawetan Jenazah</h1><p class="st">Embalming</p></div>
+  </div>
+  <div class="body">
+    <div class="story">
+      <p>Kadang keluarga tersebar di banyak kota, bahkan di negara lain, dan butuh waktu untuk bisa berkumpul.</p>
+      <p>Kami menjaga jenazah tetap dalam keadaan baik selama menunggu, supaya tidak ada yang kehilangan kesempatan untuk berpamitan.</p>
+    </div>
+    <p class="lbl">Yang kami sediakan</p>
+    <ul class="list">
+      <li>Pengawetan yang aman dan profesional</li>
+      <li>Penanganan oleh tenaga terlatih</li>
+      <li>Penjagaan martabat jenazah selama menunggu</li>
+      <li>Saran waktu yang wajar sesuai kondisi</li>
+    </ul>
+    <p class="close">Memberi waktu, supaya semua sempat mengucap selamat jalan.</p>
+    <div class="foot"><div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div><div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div></div>
   </div>
 </section>
 
 <!-- 5 -->
 <section class="bro">
-  <svg class="mark" viewBox="0 0 100 100"><use href="#melati"/></svg>
-  <p class="eyebrow">Layanan Sekar</p>
-  <h1 class="title">Pindah Makam &amp; Pemakaman Ulang</h1>
-  <p class="lead">Memindahkan peristirahatan orang terkasih ke tempat yang lebih layak bukan perkara mudah. Kami menemani dan mengurusnya langkah demi langkah, dengan hati-hati dan penuh hormat.</p>
-  <hr class="rule">
-  <p class="sub">Yang kami urus</p>
-  <ul class="list">
-    <li>Pengurusan izin dan surat-surat</li>
-    <li>Penggalian yang tertib dan beradab</li>
-    <li>Pemindahan jenazah atau kerangka</li>
-    <li>Pemakaman ulang yang khidmat di tempat baru</li>
-  </ul>
-  <p class="close">Tempat yang lebih baik, dengan perpindahan yang tenang.</p>
-  <div class="foot">
-    <div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div>
-    <div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div>
+  <div class="cover" data-q="peaceful cemetery garden green calm">
+    <img class="cover-img" alt="" aria-hidden="true">
+    <div class="cover-top"><svg class="mk" viewBox="0 0 100 100"><use href="#melati"/></svg><span class="ph">Foto layanan</span></div>
+    <div class="cover-ttl"><p class="eb">Layanan Sekar</p><h1 class="tt">Memindahkan Makam</h1><p class="st">Grave relocation</p></div>
+  </div>
+  <div class="body">
+    <div class="story">
+      <p>Ada banyak alasan sebuah makam harus dipindahkan. Lahannya akan dipakai, keluarga sudah pindah kota, atau ingin mengumpulkan yang tercinta dalam satu tempat. Apa pun alasannya, melepas untuk kedua kalinya tidak pernah terasa mudah.</p>
+      <p>Anda tidak perlu menghadapinya sendiri. Sekar menemani sejak langkah pertama, mengurus izin, menjaga proses penggalian tetap beradab, sampai memakamkan kembali dengan tenang di tempat yang baru.</p>
+    </div>
+    <p class="lbl">Yang kami urus</p>
+    <ul class="list">
+      <li>Pengurusan izin dan dokumen</li>
+      <li>Penggalian yang tertib dan beradab</li>
+      <li>Pemindahan jenazah dengan hati-hati</li>
+      <li>Koordinasi transportasi lewat mitra</li>
+      <li>Pemakaman ulang yang khidmat di tempat baru</li>
+    </ul>
+    <p class="close">Pindah ke tempat yang lebih baik, dengan ketenangan yang sama.</p>
+    <div class="foot"><div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div><div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div></div>
   </div>
 </section>
 
 <!-- 6 -->
 <section class="bro">
-  <svg class="mark" viewBox="0 0 100 100"><use href="#melati"/></svg>
-  <p class="eyebrow">Layanan Sekar</p>
-  <h1 class="title">Repatriasi &amp; Pengiriman Jenazah</h1>
-  <p class="lead">Saat seseorang berpulang jauh dari rumah, kami bantu memulangkannya kepada keluarga. Kami mengoordinasikan seluruh prosesnya lewat mitra tepercaya.</p>
-  <hr class="rule">
-  <p class="sub">Yang kami koordinasikan</p>
-  <ul class="list">
-    <li>Pengurusan dokumen antar kota maupun antar negara</li>
-    <li>Pengawetan jenazah untuk perjalanan</li>
-    <li>Pengaturan pengiriman lewat mitra resmi</li>
-    <li>Kabar yang terus kami sampaikan sampai tiba</li>
-  </ul>
-  <p class="note">Sekar mengurus dokumen dan mengoordinasikan prosesnya. Pengangkutan dijalankan oleh mitra resmi.</p>
-  <p class="close">Pulang ke tengah keluarga, dengan tangan yang mengurus.</p>
-  <div class="foot">
-    <div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div>
-    <div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div>
+  <div class="cover" data-q="airplane window soft clouds calm sky">
+    <img class="cover-img" alt="" aria-hidden="true">
+    <div class="cover-top"><svg class="mk" viewBox="0 0 100 100"><use href="#melati"/></svg><span class="ph">Foto layanan</span></div>
+    <div class="cover-ttl"><p class="eb">Layanan Sekar</p><h1 class="tt">Repatriasi &amp; Pengiriman Jenazah</h1><p class="st">Repatriation &amp; transfer</p></div>
+  </div>
+  <div class="body">
+    <div class="story">
+      <p>Berpulang jauh dari rumah meninggalkan satu kerinduan yang besar bagi keluarga, yaitu membawa pulang.</p>
+      <p>Kami membantu memulangkan yang tercinta kepada keluarganya, mengoordinasikan setiap dokumen dan jadwal lewat mitra tepercaya, baik antar kota maupun antar negara.</p>
+    </div>
+    <p class="lbl">Yang kami koordinasikan</p>
+    <ul class="list">
+      <li>Pengurusan dokumen antar kota dan antar negara</li>
+      <li>Pengawetan jenazah untuk perjalanan</li>
+      <li>Pengaturan pengiriman lewat mitra resmi</li>
+      <li>Kabar yang terus kami sampaikan sampai tiba</li>
+    </ul>
+    <p class="note">Sekar mengurus dokumen dan mengoordinasikan prosesnya. Pengangkutan dijalankan oleh mitra resmi.</p>
+    <p class="close">Pulang ke tengah keluarga, dengan tangan yang mengurus.</p>
+    <div class="foot"><div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div><div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div></div>
   </div>
 </section>
 
 <!-- 7 -->
 <section class="bro">
-  <svg class="mark" viewBox="0 0 100 100"><use href="#melati"/></svg>
-  <p class="eyebrow">Layanan Sekar</p>
-  <h1 class="title">Peti, Bunga, dan Perlengkapan</h1>
-  <p class="lead">Dari peti sederhana yang terhormat sampai ukiran jati terbaik, lengkap dengan bunga dan dekorasi. Anda memilih, kami yang menyiapkan.</p>
-  <hr class="rule">
-  <p class="sub">Yang tersedia</p>
-  <ul class="list">
-    <li>Pilihan peti, dari yang sederhana sampai jati ukir</li>
-    <li>Bunga papan dan rangkaian dekorasi</li>
-    <li>Kelengkapan pemberangkatan</li>
-    <li>Penataan yang rapi sebelum tamu datang</li>
-  </ul>
-  <p class="close">Setiap detail disiapkan, supaya Anda tinggal hadir.</p>
-  <div class="foot">
-    <div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div>
-    <div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div>
+  <div class="cover" data-q="white funeral flower wreath wood dignified">
+    <img class="cover-img" alt="" aria-hidden="true">
+    <div class="cover-top"><svg class="mk" viewBox="0 0 100 100"><use href="#melati"/></svg><span class="ph">Foto layanan</span></div>
+    <div class="cover-ttl"><p class="eb">Layanan Sekar</p><h1 class="tt">Peti, Bunga, dan Perlengkapan</h1><p class="st">Casket, flowers &amp; essentials</p></div>
+  </div>
+  <div class="body">
+    <div class="story">
+      <p>Setiap perpisahan punya nuansanya sendiri. Sebagian keluarga memilih kesederhanaan, sebagian ingin sesuatu yang lebih istimewa.</p>
+      <p>Kami menyiapkan pilihannya, dari peti sampai bunga, supaya prosesinya terasa pas dengan cara keluarga mengenang.</p>
+    </div>
+    <p class="lbl">Yang tersedia</p>
+    <ul class="list">
+      <li>Pilihan peti, dari yang sederhana sampai jati ukir</li>
+      <li>Bunga papan dan rangkaian dekorasi</li>
+      <li>Kelengkapan pemberangkatan</li>
+      <li>Penataan yang rapi sebelum tamu datang</li>
+    </ul>
+    <p class="close">Anda memilih, kami yang menyiapkan.</p>
+    <div class="foot"><div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div><div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div></div>
   </div>
 </section>
 
 <!-- 8 -->
 <section class="bro">
-  <svg class="mark" viewBox="0 0 100 100"><use href="#melati"/></svg>
-  <p class="eyebrow">Layanan Sekar</p>
-  <h1 class="title">Rumah Duka &amp; Perlengkapan Prosesi</h1>
-  <p class="lead">Tempat yang teduh untuk melepas dengan layak. Tenda, kursi, tata suara, dan konsumsi sudah tertata sebelum pelayat pertama datang.</p>
-  <hr class="rule">
-  <p class="sub">Yang kami siapkan</p>
-  <ul class="list">
-    <li>Tenda, kursi, dan tata suara</li>
-    <li>Konsumsi untuk para pelayat</li>
-    <li>Penataan ruang dan dekorasi</li>
-    <li>Pengaturan alur acara</li>
-  </ul>
-  <p class="close">Anda menyambut tamu dengan tenang. Sisanya kami yang atur.</p>
-  <div class="foot">
-    <div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div>
-    <div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div>
+  <div class="cover" data-q="white memorial tent chairs candles calm">
+    <img class="cover-img" alt="" aria-hidden="true">
+    <div class="cover-top"><svg class="mk" viewBox="0 0 100 100"><use href="#melati"/></svg><span class="ph">Foto layanan</span></div>
+    <div class="cover-ttl"><p class="eb">Layanan Sekar</p><h1 class="tt">Rumah Duka &amp; Perlengkapan Prosesi</h1><p class="st">Mourning-home setup</p></div>
+  </div>
+  <div class="body">
+    <div class="story">
+      <p>Rumah yang sedang berduka tidak seharusnya repot memikirkan tenda, kursi, dan konsumsi.</p>
+      <p>Sebelum pelayat pertama datang, semuanya sudah kami tata, supaya keluarga punya tempat yang teduh untuk menerima dan melepas.</p>
+    </div>
+    <p class="lbl">Yang kami siapkan</p>
+    <ul class="list">
+      <li>Tenda, kursi, dan tata suara</li>
+      <li>Konsumsi untuk para pelayat</li>
+      <li>Penataan ruang dan dekorasi</li>
+      <li>Pengaturan alur acara</li>
+    </ul>
+    <p class="close">Anda menyambut tamu dengan tenang. Sisanya kami yang atur.</p>
+    <div class="foot"><div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div><div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div></div>
   </div>
 </section>
 
 <!-- 9 -->
 <section class="bro">
-  <svg class="mark" viewBox="0 0 100 100"><use href="#melati"/></svg>
-  <p class="eyebrow">Layanan Sekar</p>
-  <h1 class="title">Layanan Keagamaan &amp; Dokumentasi</h1>
-  <p class="lead">Kami menghadirkan pemuka agama sesuai keyakinan keluarga dan pemandu acara. Bila Anda ingin menyimpan kenangan prosesi, kami siapkan foto dan videonya.</p>
-  <hr class="rule">
-  <p class="sub">Yang kami sediakan</p>
-  <ul class="list">
-    <li>Pemuka agama sesuai keyakinan keluarga</li>
-    <li>Pemandu jalannya acara</li>
-    <li>Dokumentasi foto dan video, bila diminta</li>
-    <li>Bantuan tata cara sesuai adat</li>
-  </ul>
-  <p class="close">Prosesi yang khidmat, dan kenangan yang terjaga.</p>
-  <div class="foot">
-    <div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div>
-    <div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div>
+  <div class="cover" data-q="praying hands candle soft warm light">
+    <img class="cover-img" alt="" aria-hidden="true">
+    <div class="cover-top"><svg class="mk" viewBox="0 0 100 100"><use href="#melati"/></svg><span class="ph">Foto layanan</span></div>
+    <div class="cover-ttl"><p class="eb">Layanan Sekar</p><h1 class="tt">Layanan Keagamaan &amp; Dokumentasi</h1><p class="st">Religious services &amp; documentation</p></div>
+  </div>
+  <div class="body">
+    <div class="story">
+      <p>Prosesi yang khidmat membutuhkan tuntunan yang tepat, dan kenangannya layak untuk disimpan.</p>
+      <p>Kami menghadirkan pemuka agama sesuai keyakinan keluarga dan pemandu acara, serta merekam momennya bila Anda menginginkannya.</p>
+    </div>
+    <p class="lbl">Yang kami sediakan</p>
+    <ul class="list">
+      <li>Pemuka agama sesuai keyakinan keluarga</li>
+      <li>Pemandu jalannya acara</li>
+      <li>Dokumentasi foto dan video, bila diminta</li>
+      <li>Bantuan tata cara sesuai adat</li>
+    </ul>
+    <p class="close">Prosesi yang khidmat, dan kenangan yang terjaga.</p>
+    <div class="foot"><div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div><div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div></div>
   </div>
 </section>
 
 <!-- 10 -->
 <section class="bro">
-  <svg class="mark" viewBox="0 0 100 100"><use href="#melati"/></svg>
-  <p class="eyebrow">Layanan Sekar</p>
-  <h1 class="title">Pengurusan Surat &amp; Administrasi</h1>
-  <p class="lead">Surat kematian dan berkas yang melelahkan biar kami yang urus. Anda tidak perlu bolak-balik di tengah duka.</p>
-  <hr class="rule">
-  <p class="sub">Yang kami bantu</p>
-  <ul class="list">
-    <li>Pengurusan surat keterangan kematian</li>
-    <li>Berkas untuk pemakaman atau kremasi</li>
-    <li>Koordinasi dengan pihak terkait</li>
-    <li>Penjelasan setiap langkah dengan sabar</li>
-  </ul>
-  <p class="close">Urusan kertas kami yang pikul, supaya Anda bisa berduka.</p>
-  <div class="foot">
-    <div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div>
-    <div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div>
+  <div class="cover" data-q="documents pen wooden desk soft calm">
+    <img class="cover-img" alt="" aria-hidden="true">
+    <div class="cover-top"><svg class="mk" viewBox="0 0 100 100"><use href="#melati"/></svg><span class="ph">Foto layanan</span></div>
+    <div class="cover-ttl"><p class="eb">Layanan Sekar</p><h1 class="tt">Pengurusan Surat &amp; Administrasi</h1><p class="st">Documents &amp; administration</p></div>
+  </div>
+  <div class="body">
+    <div class="story">
+      <p>Di tengah duka, urusan surat-menyurat sering menjadi beban yang melelahkan dan membingungkan.</p>
+      <p>Biar kami yang mengurusnya, dari surat keterangan kematian sampai berkas pemakaman, supaya Anda tidak perlu bolak-balik.</p>
+    </div>
+    <p class="lbl">Yang kami bantu</p>
+    <ul class="list">
+      <li>Pengurusan surat keterangan kematian</li>
+      <li>Berkas untuk pemakaman atau kremasi</li>
+      <li>Koordinasi dengan pihak terkait</li>
+      <li>Penjelasan setiap langkah dengan sabar</li>
+    </ul>
+    <p class="close">Urusan kertas kami yang pikul, supaya Anda bisa berduka.</p>
+    <div class="foot"><div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div><div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div></div>
   </div>
 </section>
 
 <!-- 11 -->
 <section class="bro">
-  <svg class="mark" viewBox="0 0 100 100"><use href="#melati"/></svg>
-  <p class="eyebrow">Layanan Sekar</p>
-  <h1 class="title">Proteksi Sekar</h1>
-  <p class="subtitle">rencana sejak dini</p>
-  <p class="lead">Sebagian keluarga memilih menyiapkan dari jauh hari, supaya kelak tidak ada yang dibebani keputusan tergesa. Lewat Proteksi Sekar, semuanya direncanakan sekarang, dengan tenang dan cicilan yang ringan.</p>
-  <hr class="rule">
-  <p class="sub">Yang Anda dapatkan</p>
-  <ul class="list">
-    <li>Rencana layanan yang disiapkan sejak dini</li>
-    <li>Pilihan cicilan yang ringan</li>
-    <li>Harga yang dikunci sejak awal</li>
-    <li>Ketenangan bahwa semuanya sudah diatur</li>
-  </ul>
-  <p class="note">Proteksi Sekar adalah rencana dan tabungan layanan, bukan produk asuransi.</p>
-  <p class="close">Menyiapkan dengan tenang hari ini, demi ketenangan esok.</p>
-  <div class="foot">
-    <div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div>
-    <div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div>
+  <div class="cover" data-q="calm hands soft light serene planning">
+    <img class="cover-img" alt="" aria-hidden="true">
+    <div class="cover-top"><svg class="mk" viewBox="0 0 100 100"><use href="#melati"/></svg><span class="ph">Foto layanan</span></div>
+    <div class="cover-ttl"><p class="eb">Layanan Sekar</p><h1 class="tt">Proteksi Sekar</h1><p class="st">Planning ahead</p></div>
+  </div>
+  <div class="body">
+    <div class="story">
+      <p>Sebagian keluarga memilih menyiapkan jauh hari, supaya kelak tidak ada yang dibebani keputusan tergesa.</p>
+      <p>Lewat Proteksi Sekar, semuanya bisa direncanakan dari sekarang, dengan tenang dan cicilan yang ringan.</p>
+    </div>
+    <p class="lbl">Yang Anda dapatkan</p>
+    <ul class="list">
+      <li>Rencana layanan yang disiapkan sejak dini</li>
+      <li>Pilihan cicilan yang ringan</li>
+      <li>Harga yang dikunci sejak awal</li>
+      <li>Ketenangan bahwa semuanya sudah diatur</li>
+    </ul>
+    <p class="note">Proteksi Sekar adalah rencana dan tabungan layanan, bukan produk asuransi.</p>
+    <p class="close">Menyiapkan dengan tenang hari ini, demi ketenangan esok.</p>
+    <div class="foot"><div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div><div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div></div>
   </div>
 </section>
 
 <!-- 12 -->
 <section class="bro">
-  <svg class="mark" viewBox="0 0 100 100"><use href="#melati"/></svg>
-  <p class="eyebrow">Layanan Sekar</p>
-  <h1 class="title">Pendampingan Funeral Manager</h1>
-  <p class="lead">Di setiap layanan, satu orang dari Sekar menemani Anda dari telepon pertama sampai semuanya selesai. Bukan sekadar suara di telepon, tapi seseorang yang benar-benar hadir.</p>
-  <hr class="rule">
-  <p class="sub">Yang Anda dapatkan</p>
-  <ul class="list">
-    <li>Satu pendamping tetap, dari awal sampai akhir</li>
-    <li>Hadir langsung, bukan sekadar nomor telepon</li>
-    <li>Mengoordinasikan semua kebutuhan untuk Anda</li>
-    <li>Siap dihubungi kapan saja, siang atau malam</li>
-  </ul>
-  <p class="close">Anda tidak sendirian, di satu langkah pun.</p>
-  <div class="foot">
-    <div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div>
-    <div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div>
+  <div class="cover" data-q="gentle comforting hand on shoulder soft warm">
+    <img class="cover-img" alt="" aria-hidden="true">
+    <div class="cover-top"><svg class="mk" viewBox="0 0 100 100"><use href="#melati"/></svg><span class="ph">Foto layanan</span></div>
+    <div class="cover-ttl"><p class="eb">Layanan Sekar</p><h1 class="tt">Pendampingan Funeral Manager</h1><p class="st">A funeral manager by your side</p></div>
+  </div>
+  <div class="body">
+    <div class="story">
+      <p>Saat semuanya terasa berat, satu hal benar-benar membuat perbedaan: ada orang yang sungguh menemani.</p>
+      <p>Di setiap layanan, satu Funeral Manager dari Sekar mendampingi Anda dari telepon pertama sampai semuanya selesai. Bukan sekadar suara di telepon, tapi seseorang yang benar-benar hadir.</p>
+    </div>
+    <p class="lbl">Yang Anda dapatkan</p>
+    <ul class="list">
+      <li>Satu pendamping tetap, dari awal sampai akhir</li>
+      <li>Hadir langsung, bukan sekadar nomor telepon</li>
+      <li>Mengoordinasikan semua kebutuhan untuk Anda</li>
+      <li>Siap dihubungi kapan saja, siang atau malam</li>
+    </ul>
+    <p class="close">Anda tidak sendirian, di satu langkah pun.</p>
+    <div class="foot"><div class="fbrand"><svg viewBox="0 0 100 100"><use href="#melati"/></svg><div><b>Sekar</b><span>Pendamping Pemakaman, Solo Raya</span></div></div><div class="fcontact">Siap 24 jam<br><b>+62 812-3456-7890</b></div></div>
   </div>
 </section>
 
+<script>
+/* Optional: cover photos via Google Custom Search image API.
+   Fill both values, then each brochure's cover band shows a fitting photo.
+   Leave empty and the brochures keep their clean purple covers. */
+(function(){
+  var CONFIG = { googleApiKey: "", googleCx: "" };
+  if(!CONFIG.googleApiKey || !CONFIG.googleCx) return;
+  document.querySelectorAll('.cover[data-q]').forEach(function(cover){
+    var q = cover.getAttribute('data-q'), img = cover.querySelector('.cover-img');
+    if(!q || !img) return;
+    var ck = 'sekar-img:'+q, cached=null; try{cached=localStorage.getItem(ck);}catch(e){}
+    function show(u){ img.onload=function(){img.classList.add('loaded');}; img.src=u; }
+    if(cached){ show(cached); return; }
+    fetch('https://www.googleapis.com/customsearch/v1?key='+encodeURIComponent(CONFIG.googleApiKey)+'&cx='+encodeURIComponent(CONFIG.googleCx)+'&searchType=image&imgType=photo&imgSize=xlarge&safe=active&num=1&q='+encodeURIComponent(q))
+      .then(function(r){return r.json();}).then(function(d){
+        var link=d&&d.items&&d.items[0]&&d.items[0].link; if(!link) return;
+        var p=new Image(); p.onload=function(){ show(link); try{localStorage.setItem(ck,link);}catch(e){} }; p.src=link;
+      }).catch(function(){});
+  });
+})();
+</script>
 </body>
 </html>
