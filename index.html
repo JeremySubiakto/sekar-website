@@ -84,6 +84,7 @@
         <p class="lead-p" data-i18n="empati.body">Dalam hitungan jam setelah seseorang berpulang, keluarga sering harus mengurus banyak hal sekaligus: memandikan, peti, tenda, konsumsi, hingga surat-surat. Di saat hati sedang hancur, itu terlalu banyak untuk dipikul sendiri. Sekar hadir untuk mengangkat beban itu dari pundak Anda, supaya ada ruang untuk berduka dan mengantar dengan tenang.</p>
       </div>
     </div>
+    <figure class="photo-band" data-q="lit candle soft glow calm serene" aria-hidden="true"><img alt=""></figure>
   </section>
 
   <!-- ===== LAYANAN ===== -->
@@ -727,6 +728,13 @@
       });
     });
   }
+
+  /* B&W + purple photo bands (loaded via Unsplash, same as the view heroes) */
+  document.querySelectorAll(".photo-band[data-q]").forEach(function (fig) {
+    var img = fig.querySelector("img"), q = fig.getAttribute("data-q");
+    if (!img || !q) return;
+    resolveImage(q, function (url) { img.onload = function () { img.classList.add("loaded"); }; img.src = url; });
+  });
 })();
 </script>
 

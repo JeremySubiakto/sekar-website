@@ -205,6 +205,12 @@ nav{display:flex;align-items:center;gap:22px;height:68px}
 .view-body.center{text-align:center}
 .view-body.center .lead-p{margin-left:auto;margin-right:auto}
 
+/* full-width B&W photo band with a subtle purple gradient */
+.photo-band{position:relative;width:100%;height:clamp(260px,40vh,440px);overflow:hidden;background:radial-gradient(120% 120% at 50% 0,#5a2a83,#3a1659 60%,#2d1040)}
+.photo-band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;filter:grayscale(1) contrast(1.05) brightness(.98);transition:opacity 1s ease}
+.photo-band img.loaded{opacity:.72}
+.photo-band::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(74,31,110,.30),rgba(45,16,64,.55));pointer-events:none}
+
 /* services view: divider before the second sub-theme */
 .svc-head{margin-top:56px}
 .svc-head .kicker{display:block;margin-bottom:12px}
