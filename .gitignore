@@ -8,3 +8,6 @@ desktop.ini
 
 # dependencies (none used, but just in case)
 node_modules/
+
+# internal marketing working files — kept local, not published on the live site
+marketing/
