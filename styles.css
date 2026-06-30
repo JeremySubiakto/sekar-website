@@ -243,6 +243,9 @@ body.modal-open{overflow:hidden}
 .svc-modal-body{padding:26px 28px 30px}
 .svc-modal-body h3{font-size:27px;line-height:1.2;color:var(--deep);margin-bottom:12px}
 .svc-modal-body p{font-size:15.5px;color:#4a4140;line-height:1.7;margin-bottom:22px}
+.svc-modal-actions{display:flex;flex-wrap:wrap;gap:10px}
+.btn-soft{background:transparent;color:var(--deep);border:1.5px solid var(--deep);padding:12.5px 24px}
+.btn-soft:hover{background:var(--deep);color:#fff;transform:translateY(-1px)}
 @media(max-width:560px){.svc-modal-card{margin:0;width:100%;min-height:100%;max-height:100vh;border-radius:0}.svc-modal-media{border-radius:0}}
 
 /* ===================== HOW-IT-WORKS · TIMELINE FLOWCHART ===================== */

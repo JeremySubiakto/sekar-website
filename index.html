@@ -296,7 +296,10 @@
     <div class="svc-modal-body">
       <h3 id="svcModalTitle"></h3>
       <p id="svcModalDesc"></p>
-      <a class="btn" id="svcModalCta" data-i18n="modal.cta" href="#">Tanya tentang layanan ini</a>
+      <div class="svc-modal-actions">
+        <a class="btn" id="svcModalCta" data-i18n="modal.cta" href="#">Tanya tentang layanan ini</a>
+        <a class="btn btn-soft" id="svcModalPdf" data-i18n="modal.pdf" href="#" download>Unduh brosur (PDF)</a>
+      </div>
     </div>
   </div>
 </div>
@@ -422,6 +425,7 @@
       "svc_companion_d": "Di setiap layanan, satu orang dari Sekar menemani Anda dari telepon pertama sampai semuanya selesai. Bukan sekadar suara di telepon, tapi seseorang yang benar-benar hadir.",
       "svc_more": "Selengkapnya →",
       "modal.cta": "Tanya tentang layanan ini",
+      "modal.pdf": "Unduh brosur (PDF)",
       "modal.close": "Tutup",
       "footer.tagline": "Pendamping Pemakaman Profesional.<br>Melayani 24 jam, Solo Raya.",
       "footer.contactLabel": "Hubungi", "footer.waLabel": "WhatsApp", "footer.telLabel": "Telepon",
@@ -535,6 +539,7 @@
       "svc_companion_d": "In every service, one person from Sekar stays with you from the first call until everything is done. Not a call center, but someone who is truly there.",
       "svc_more": "View details →",
       "modal.cta": "Ask about this service",
+      "modal.pdf": "Download brochure (PDF)",
       "modal.close": "Close",
       "footer.tagline": "Professional funeral companions.<br>Available 24 hours, across Solo Raya.",
       "footer.contactLabel": "Contact", "footer.waLabel": "WhatsApp", "footer.telLabel": "Phone",
@@ -661,12 +666,20 @@
     svc_plan: "calm hands soft light planning serene",
     svc_companion: "gentle comforting hand on shoulder soft"
   };
+  /* per-service brochure PDF (files in assets/brochure/) */
+  var SVC_PDF = {
+    svc_farewell: "final-farewell", svc_cremation: "cremation", svc_care: "body-care",
+    svc_preserve: "embalming", svc_relocation: "grave-relocation", svc_repatriation: "repatriation",
+    svc_casket: "casket-flowers", svc_home: "funeral-home", svc_religious: "religious-documentation",
+    svc_admin: "administration", svc_plan: "sekar-protection", svc_companion: "funeral-manager"
+  };
   var modal = document.getElementById("svcModal");
   if (modal) {
     var mImg = document.getElementById("svcModalImg"),
         mTitle = document.getElementById("svcModalTitle"),
         mDesc = document.getElementById("svcModalDesc"),
         mCta = document.getElementById("svcModalCta"),
+        mPdf = document.getElementById("svcModalPdf"),
         lastFocus = null;
     function openModal(card) {
       var h3 = card.querySelector("h3"), p = card.querySelector("p");
@@ -678,6 +691,11 @@
       var en = document.documentElement.lang === "en";
       var msg = (en ? "Hello Sekar, I'd like to ask about: " : "Halo Sekar, saya ingin bertanya tentang layanan: ") + h3.textContent;
       mCta.setAttribute("href", "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg));
+      if (mPdf) {
+        var slug = SVC_PDF[key];
+        if (slug) { mPdf.setAttribute("href", "assets/brochure/sekar-brosur-" + slug + ".pdf"); mPdf.style.display = ""; }
+        else { mPdf.style.display = "none"; }
+      }
       lastFocus = card;
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
