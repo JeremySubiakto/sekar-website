@@ -195,7 +195,7 @@ nav{display:flex;align-items:center;gap:22px;height:68px}
 /* per-view hero: theme + sub-theme over a photo */
 .view-hero{position:relative;min-height:312px;display:flex;align-items:center;justify-content:center;text-align:center;padding:72px 22px;overflow:hidden;background:radial-gradient(120% 120% at 50% 0,#5a2a83 0,#3a1659 58%,#2d1040 100%)}
 .view-hero-media{position:absolute;inset:0;z-index:0}
-.view-hero-media img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s ease}
+.view-hero-media img{width:100%;height:100%;object-fit:cover;opacity:0;filter:grayscale(1) contrast(1.05);transition:opacity .9s ease}
 .view-hero-media img.loaded{opacity:.42}
 .view-hero::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(45,16,64,.50),rgba(45,16,64,.80))}
 .view-hero-text{position:relative;z-index:2;max-width:760px}
@@ -235,8 +235,9 @@ body.modal-open{overflow:hidden}
 @keyframes modalIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion: reduce){.svc-modal-card{animation:none}}
 .svc-modal-media{position:relative;aspect-ratio:16/9;overflow:hidden;border-radius:20px 20px 0 0;background:radial-gradient(120% 120% at 50% 0,#5a2a83 0,#3a1659 58%,#2d1040 100%)}
-.svc-modal-media img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease}
-.svc-modal-media img.loaded{opacity:1}
+.svc-modal-media img{width:100%;height:100%;object-fit:cover;opacity:0;filter:grayscale(1) contrast(1.05);transition:opacity .6s ease}
+.svc-modal-media img.loaded{opacity:.85}
+.svc-modal-media::after{content:"";position:absolute;inset:0;background:linear-gradient(165deg,rgba(123,63,158,.30),rgba(74,31,110,.42) 60%,rgba(45,16,64,.6));pointer-events:none}
 .svc-modal-x{position:absolute;top:13px;right:13px;z-index:3;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:var(--deep);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.22);transition:transform .2s}
 .svc-modal-x:hover{transform:scale(1.08)}
 .svc-modal-body{padding:26px 28px 30px}
