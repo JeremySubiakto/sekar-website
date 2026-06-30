@@ -223,6 +223,28 @@ nav{display:flex;align-items:center;gap:22px;height:68px}
 .kontak-lines .kontak-person{font-weight:600;color:var(--deep)}
 .kontak-lines .muted{color:var(--soft);font-size:14.5px}
 
+/* journal view: featured report card */
+.journal{max-width:980px;margin:0 auto}
+.report-card{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:start;background:#fff;border:1px solid #ece3f4;border-radius:20px;padding:36px;box-shadow:0 22px 60px rgba(74,31,110,.09)}
+.report-cover-link{display:block;line-height:0;border-radius:12px;transition:transform .2s}
+.report-cover-link:hover{transform:translateY(-3px)}
+.report-cover{width:100%;height:auto;border-radius:12px;box-shadow:0 16px 38px rgba(45,16,64,.26)}
+.report-tag{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-ink);font-weight:600;margin-bottom:14px}
+.report-text h3{font-size:31px;line-height:1.1;margin-bottom:8px}
+.report-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:var(--soft);line-height:1.3;margin-bottom:14px}
+.report-meta{font-size:12.5px;letter-spacing:.04em;color:var(--gold-ink);margin-bottom:18px}
+.report-desc{font-size:16px;color:#3c3343;line-height:1.7;margin-bottom:24px}
+.report-stats{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:28px}
+.report-stats .rs{border-top:2px solid var(--gold);padding-top:9px;min-width:118px}
+.report-stats .rs .n{display:block;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:27px;color:var(--deep);line-height:1}
+.report-stats .rs .l{display:block;font-size:12px;color:var(--soft);margin-top:5px;line-height:1.35}
+@media (max-width:720px){
+  .report-card{grid-template-columns:1fr;gap:26px;padding:24px;text-align:center}
+  .report-cover{max-width:228px;margin:0 auto}
+  .report-stats{justify-content:center}
+  .report-stats .rs{text-align:left}
+}
+
 /* slim persistent footer */
 footer.slim{padding:26px 22px}
 footer.slim .fnote{margin:0;border:0;padding:0;flex-direction:column;align-items:center;text-align:center;gap:6px}
