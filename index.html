@@ -316,7 +316,7 @@
   document.documentElement.classList.add("js");
 
   var WA_NUMBER = "6281234567890"; // TODO ganti dengan nomor Sekar yang asli
-  var CONFIG = { googleApiKey: "AIzaSyAOhJBgJW9cFGG_rlkSyFGOZc5WDFqZM0A", googleCx: "2099013140f704642" }; // TODO isi keduanya untuk foto
+  var CONFIG = { unsplashKey: "p_iFH0cjZ0ALmHILPfGMFTMmKx3i_THHaP4oazZPhUQ" }; // Unsplash Access Key (public, client-side)
 
   var I18N = {
     id: {
@@ -594,21 +594,20 @@
     b.addEventListener("click", function () { apply(b.getAttribute("data-lang")); });
   });
 
-  /* ---- images (Google Custom Search image API; no key -> gradient stays) ---- */
+  /* ---- images (Unsplash API; no key -> gradient stays) ---- */
   function resolveImage(q, onUrl) {
-    if (!q || !CONFIG.googleApiKey || !CONFIG.googleCx) return;
+    if (!q || !CONFIG.unsplashKey) return;
     var cacheKey = "sekar-img:" + q, cached = null;
     try { cached = localStorage.getItem(cacheKey); } catch (e) {}
     if (cached) { onUrl(cached); return; }
-    var url = "https://www.googleapis.com/customsearch/v1?key=" + encodeURIComponent(CONFIG.googleApiKey) +
-              "&cx=" + encodeURIComponent(CONFIG.googleCx) +
-              "&searchType=image&imgType=photo&imgSize=xlarge&safe=active&num=1&q=" + encodeURIComponent(q);
+    var url = "https://api.unsplash.com/search/photos?per_page=1&orientation=landscape&content_filter=high&query=" +
+              encodeURIComponent(q) + "&client_id=" + CONFIG.unsplashKey;
     fetch(url).then(function (r) { return r.json(); }).then(function (d) {
-      var link = d && d.items && d.items[0] && d.items[0].link;
-      if (!link) return;
+      var u = d && d.results && d.results[0] && d.results[0].urls ? d.results[0].urls.regular : null;
+      if (!u) return;
       var probe = new Image();
-      probe.onload = function () { onUrl(link); try { localStorage.setItem(cacheKey, link); } catch (e) {} };
-      probe.src = link;
+      probe.onload = function () { onUrl(u); try { localStorage.setItem(cacheKey, u); } catch (e) {} };
+      probe.src = u;
     }).catch(function () {});
   }
   function loadViewImage(view) {

@@ -365,22 +365,23 @@
 </section>
 
 <script>
-/* Optional: cover photos via Google Custom Search image API.
-   Fill both values, then each brochure's cover band shows a fitting photo.
-   Leave empty and the brochures keep their clean purple covers. */
+/* Optional: cover photos via the Unsplash API.
+   Paste your Unsplash Access Key below and each cover band pulls a fitting
+   photo (rendered grayscale + purple by the CSS). Leave it empty and the
+   brochures keep their clean purple covers. */
 (function(){
-  var CONFIG = { googleApiKey: "AIzaSyAOhJBgJW9cFGG_rlkSyFGOZc5WDFqZM0A", googleCx: "2099013140f704642" };
-  if(!CONFIG.googleApiKey || !CONFIG.googleCx) return;
+  var CONFIG = { unsplashKey: "p_iFH0cjZ0ALmHILPfGMFTMmKx3i_THHaP4oazZPhUQ" }; // Unsplash Access Key (public, client-side)
+  if(!CONFIG.unsplashKey) return;
   document.querySelectorAll('.cover[data-q]').forEach(function(cover){
     var q = cover.getAttribute('data-q'), img = cover.querySelector('.cover-img');
     if(!q || !img) return;
     var ck = 'sekar-img:'+q, cached=null; try{cached=localStorage.getItem(ck);}catch(e){}
     function show(u){ img.onload=function(){img.classList.add('loaded');}; img.src=u; }
     if(cached){ show(cached); return; }
-    fetch('https://www.googleapis.com/customsearch/v1?key='+encodeURIComponent(CONFIG.googleApiKey)+'&cx='+encodeURIComponent(CONFIG.googleCx)+'&searchType=image&imgType=photo&imgSize=xlarge&safe=active&num=1&q='+encodeURIComponent(q))
+    fetch('https://api.unsplash.com/search/photos?per_page=1&orientation=landscape&content_filter=high&query='+encodeURIComponent(q)+'&client_id='+CONFIG.unsplashKey)
       .then(function(r){return r.json();}).then(function(d){
-        var link=d&&d.items&&d.items[0]&&d.items[0].link; if(!link) return;
-        var p=new Image(); p.onload=function(){ show(link); try{localStorage.setItem(ck,link);}catch(e){} }; p.src=link;
+        var u=d&&d.results&&d.results[0]&&d.results[0].urls?d.results[0].urls.regular:null; if(!u) return;
+        var p=new Image(); p.onload=function(){ show(u); try{localStorage.setItem(ck,u);}catch(e){} }; p.src=u;
       }).catch(function(){});
   });
 })();
