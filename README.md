@@ -42,8 +42,8 @@ Lalu buka alamat yang ditampilkan (mis. `http://localhost:8000`).
 
 ## ⚠️ Sebelum dipublikasikan — wajib diganti
 
-1. **Nomor WhatsApp & telepon.** Saat ini masih placeholder `6281234567890` (tampil `+62 812-3456-7890`).
-   Cara termudah: cari-ganti **semua** `6281234567890` → nomor asli, dan `+62 812-3456-7890`
+1. **Nomor WhatsApp & telepon.** Saat ini masih placeholder `6287771111177` (tampil `+62 877-7111-1177`).
+   Cara termudah: cari-ganti **semua** `6287771111177` → nomor asli, dan `+62 877-7111-1177`
    → nomor tampil, di `index.html`. (Tautan WhatsApp dibangun dari satu konstanta `WA_NUMBER`
    di dalam `<script>`; sisanya adalah cadangan tanpa-JS + nomor yang ditampilkan di footer.)
    Format `wa.me`: kode negara tanpa `+` dan tanpa `0` depan, contoh `62812xxxxxxx`.
