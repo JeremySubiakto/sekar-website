@@ -47,7 +47,7 @@ Lalu buka alamat yang ditampilkan (mis. `http://localhost:8000`).
    → nomor tampil, di `index.html`. (Tautan WhatsApp dibangun dari satu konstanta `WA_NUMBER`
    di dalam `<script>`; sisanya adalah cadangan tanpa-JS + nomor yang ditampilkan di footer.)
    Format `wa.me`: kode negara tanpa `+` dan tanpa `0` depan, contoh `62812xxxxxxx`.
-2. **Domain.** Ganti `https://sekarsolo.com` dengan domain asli di: `index.html` (canonical + Open Graph),
+2. **Domain.** Ganti `https://sekarfuneral.com` dengan domain asli di: `index.html` (canonical + Open Graph),
    `robots.txt`, dan `sitemap.xml`. Tanpa domain yang benar, gambar preview WhatsApp tidak muncul.
 3. **Harga paket** (`index.html`): Rp 17,5 jt / Rp 32 jt / Rp 45 jt — sesuaikan jika berubah.
 4. **Alamat & jam** di footer, bila ingin lebih spesifik.
@@ -68,5 +68,5 @@ vercel        # ikuti prompt, lalu `vercel --prod`
 Push isi folder ke sebuah repo, aktifkan **Settings → Pages → branch `main` / root**.
 
 ### Domain
-Beli `sekarsolo.com` atau `sekar.id`, lalu arahkan DNS-nya ke Netlify/Vercel
+Beli `sekarfuneral.com` atau `sekar.id`, lalu arahkan DNS-nya ke Netlify/Vercel
 (ikuti panduan domain di dashboard masing-masing). Setelah domain aktif, ulangi langkah **#2** di atas.

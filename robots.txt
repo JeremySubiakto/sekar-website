@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sekarsolo.com/sitemap.xml
+Sitemap: https://sekarfuneral.com/sitemap.xml
